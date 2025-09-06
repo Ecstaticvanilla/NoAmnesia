@@ -6,7 +6,7 @@
 */
 public class Main{
     public static void main(String[] args) {
-        System.err.println();
-        
+        //Run Main Form
+        ui.Form.main(args);          
     } 
 }
