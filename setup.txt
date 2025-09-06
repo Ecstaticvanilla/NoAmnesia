@@ -1,0 +1,5 @@
+#First Time
+    open terminal in NoAmnesia
+    run: npm install
+    (on first time running the script scan the qrcode generated throught whatsapp)
+
