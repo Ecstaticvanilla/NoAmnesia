@@ -61,6 +61,7 @@ public class FileStorage {
             e.printStackTrace();
         }
     }
+    
     //Add to submitted assignment
     public void submittedAssignment(backend.AssignmentComponent x) {
         String assignmentJson = x.toString(); 
@@ -104,4 +105,37 @@ public class FileStorage {
         }  
         return assignments;
     }
+
+    //remove assignment from pending.json
+    public void removePendingAssignment(String experimentName) {
+        List<AssignmentComponent> assignments = retrievePendingAssignments();
+        boolean removed = assignments.removeIf(a -> a.getExperimentName().equalsIgnoreCase(experimentName));
+        if (removed) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Data/Pending.json"))) {
+                for (AssignmentComponent a : assignments) {
+                    writer.write(a.toString());
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //remove assignment from submission.json
+        public void removeSubmittedAssignment(String experimentName) {
+        List<AssignmentComponent> assignments = retrieveSubmittedAssignments();
+        boolean removed = assignments.removeIf(a -> a.getExperimentName().equalsIgnoreCase(experimentName));
+        if (removed) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Data/Submitted.json"))) {
+                for (AssignmentComponent a : assignments) {
+                    writer.write(a.toString());
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }

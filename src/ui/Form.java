@@ -73,8 +73,8 @@ public class Form extends JFrame {
         // setContentPane(rootPane);
         // Background color and icon
         getContentPane().setBackground(new Color(41, 68, 90));
-        // ImageIcon icon = new ImageIcon(Form.class.getResource("/resources/icon.png"));
-        // setIconImage(icon.getImage());
+        ImageIcon icon = new ImageIcon("resources/icon.png"); 
+        setIconImage(icon.getImage());
 
         // Labels
         JLabel expLabel = new JLabel("Experiment Name:");
@@ -175,6 +175,42 @@ public class Form extends JFrame {
             // Clear input fields
             experimentField.setText("");
             subjectField.setText("");
+        });
+
+        //Deletion Button
+        Button deleteButton = new Button("- Delete Selected");
+        deleteButton.setBounds(380, 600, 150, 50);
+        deleteButton.setFont(new Font("Arial",Font.PLAIN,15));
+        add(deleteButton);
+
+        deleteButton.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Select a row to delete!");
+                return;
+            }
+            String exp = (String) tableModel.getValueAt(row, 0);
+            fileStorage.removePendingAssignment(exp);
+            tableModel.removeRow(row);
+        });
+
+        //Refresh Button
+        Button refreshButton = new Button("Refresh");
+        refreshButton.setFont(new Font("Arial",Font.PLAIN,15));
+        refreshButton.setBounds(15,600, 100, 50);
+        add(refreshButton);
+    
+        refreshButton.addActionListener(e ->{
+            List<AssignmentComponent> pendingList2 = fileStorage.retrievePendingAssignments();
+            tableModel.setRowCount(0);             
+            for (AssignmentComponent a : pendingList2) {
+                tableModel.addRow(new Object[]{
+                    a.getExperimentName(),
+                    a.getSubjectName(),
+                    a.getSubmissionDate().toString(),
+                    a.getSubmissionTime().toString()
+                });
+            }        
         });
         setVisible(true);
     }
