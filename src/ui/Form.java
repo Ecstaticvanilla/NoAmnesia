@@ -30,6 +30,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.ArrayList;
 
+
 //Button Class
 class Button extends JButton {
     public Button(String text) {
@@ -59,44 +60,48 @@ public class Form extends JFrame {
     private DefaultTableModel tableModel;
 
     public Form() {
-        initUI(); 
+        initUI();
     }
 
     public void initUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 700);
+        setSize(725, 700);
         setResizable(false);
         setTitle("NoAmnesia");
         setLayout(null);
-        setVisible(true);
 
+        // setContentPane(rootPane);
         // Background color and icon
         getContentPane().setBackground(new Color(41, 68, 90));
-        ImageIcon icon = new ImageIcon(Form.class.getResource("/resources/icon.png"));
-        setIconImage(icon.getImage());
+        // ImageIcon icon = new ImageIcon(Form.class.getResource("/resources/icon.png"));
+        // setIconImage(icon.getImage());
 
         // Labels
         JLabel expLabel = new JLabel("Experiment Name:");
         expLabel.setBounds(50, 250, 120, 25);
+        expLabel.setForeground(Color.WHITE);
         add(expLabel);
 
         JLabel subjLabel = new JLabel("Subject Name:");
         subjLabel.setBounds(50, 280, 120, 25);
+        subjLabel.setForeground(Color.WHITE);
         add(subjLabel);
 
         JLabel dateLabel = new JLabel("Submission Date:");
         dateLabel.setBounds(50, 310, 120, 25);
+        dateLabel.setForeground(Color.WHITE);
         add(dateLabel);
 
         JLabel timeLabel = new JLabel("Submission Time:");
         timeLabel.setBounds(50, 340, 120, 25);
+        timeLabel.setForeground(Color.WHITE);
         add(timeLabel);
-
+        
         // Input fields
         JTextField experimentField = new JTextField();
         experimentField.setBounds(180, 250, 200, 25);
         add(experimentField);
-
+        
         JTextField subjectField = new JTextField();
         subjectField.setBounds(180, 280, 200, 25);
         add(subjectField);
@@ -136,8 +141,9 @@ public class Form extends JFrame {
 
 
         // Add button
-        Button addButton = new Button("+");
-        addButton.setBounds(825, 600, 50, 50);
+        Button addButton = new Button("+ Add Deadline");
+        addButton.setFont(new Font("Arial",Font.PLAIN,15));
+        addButton.setBounds(550, 600, 150, 50);
         add(addButton);
 
         addButton.addActionListener(e -> {
@@ -170,6 +176,7 @@ public class Form extends JFrame {
             experimentField.setText("");
             subjectField.setText("");
         });
+        setVisible(true);
     }
 
 }

@@ -18,7 +18,6 @@ import java.io.IOException;
 
 public class FileStorage {
 
-    DateParser dateParser = new DateParser();
     public static AssignmentComponent toAssignment(String json){
         json = json.trim();
         if (json.startsWith("{")) json = json.substring(1);
