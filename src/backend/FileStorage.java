@@ -49,93 +49,86 @@ public class FileStorage {
     return new AssignmentComponent(experimentName, subjectName, submissionDate, submissionTime);
     }
 
-    //Add to pending assignment
-    public void addAssignment(backend.AssignmentComponent x) {
-        String assignmentJson = x.toString(); 
-        System.out.println(assignmentJson);
-        try (BufferedWriter pendingWriter = new BufferedWriter(new FileWriter("Data/Pending.json", true))) {
-            pendingWriter.write(assignmentJson);
-            pendingWriter.newLine(); 
-        } 
-        catch (IOException e) {
+    // Add to pending assignment
+    public void addAssignment(AssignmentComponent x) {
+        List<AssignmentComponent> assignments = retrievePendingAssignments(); 
+        assignments.add(x);
+        saveAssignments(assignments, "Data/Pending.json");
+    }
+
+    // Add to submitted assignment
+    public void submittedAssignment(AssignmentComponent x) {
+        List<AssignmentComponent> assignments = retrieveSubmittedAssignments(); 
+        assignments.add(x);
+        saveAssignments(assignments, "Data/Submitted.json");
+    }
+
+    // Save a list as JSON array
+    private void saveAssignments(List<AssignmentComponent> assignments, String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("[\n");
+            for (int i = 0; i < assignments.size(); i++) {
+                writer.write("  " + assignments.get(i).toString());
+                if (i < assignments.size() - 1) writer.write(",");
+                writer.write("\n");
+            }
+            writer.write("]");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    //Add to submitted assignment
-    public void submittedAssignment(backend.AssignmentComponent x) {
-        String assignmentJson = x.toString(); 
-        System.out.println(assignmentJson);
-        try (BufferedWriter submittedWriter = new BufferedWriter(new FileWriter("Data/Submitted.json", true))) {
-            submittedWriter.write(assignmentJson);
-            submittedWriter.newLine(); 
-        } 
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    //retrieve list of pending assignments
+
+
+    // Retrieve pending assignments
     public List<AssignmentComponent> retrievePendingAssignments() {
+        return readAssignments("Data/Pending.json");
+    }
+
+    // Retrieve submitted assignments
+    public List<AssignmentComponent> retrieveSubmittedAssignments() {
+        return readAssignments("Data/Submitted.json");
+    }
+
+    // Generic JSON array reader
+    private List<AssignmentComponent> readAssignments(String filePath) {
         List<AssignmentComponent> assignments = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Data/Pending.json"))) {
+        StringBuilder json = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (!line.isBlank()) {
-                    AssignmentComponent obj = toAssignment(line);
-                    assignments.add(obj);
+                json.append(line.trim());
+            }
+        } 
+        catch (IOException e) {
+            return assignments; 
+        }
+
+        String content = json.toString().trim();
+        if (content.startsWith("[") && content.endsWith("]")) {
+            content = content.substring(1, content.length() - 1).trim();
+            if (!content.isEmpty()) {
+                String[] objects = content.split("},");
+                for (int i = 0; i < objects.length; i++) {
+                    String obj = objects[i].trim();
+                    if (!obj.endsWith("}")) obj += "}";
+                    assignments.add(toAssignment(obj));
                 }
             }
-        } 
-        catch (IOException e) {
-            e.printStackTrace();
         }
-        return assignments;
-    }
-    //retrieve list of submitted assignments
-    public List<AssignmentComponent> retrieveSubmittedAssignments() { 
-        List<AssignmentComponent> assignments = new ArrayList<>();
-        try (BufferedReader submittedReader = new BufferedReader(new FileReader("Data/Submitted.json"))) {
-            String line;
-            while ((line = submittedReader.readLine()) != null) {
-                assignments.add(toAssignment(line));
-            }
-        } 
-        catch (IOException e) {
-            e.printStackTrace();
-        }  
         return assignments;
     }
 
-    //remove assignment from pending.json
+    // Remove pending assignment by experimentName
     public void removePendingAssignment(String experimentName) {
         List<AssignmentComponent> assignments = retrievePendingAssignments();
         boolean removed = assignments.removeIf(a -> a.getExperimentName().equalsIgnoreCase(experimentName));
-        if (removed) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Data/Pending.json"))) {
-                for (AssignmentComponent a : assignments) {
-                    writer.write(a.toString());
-                    writer.newLine();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        if (removed) saveAssignments(assignments, "Data/Pending.json");
     }
-    //remove assignment from submission.json
-        public void removeSubmittedAssignment(String experimentName) {
+    // Remove submitted assignment
+    public void removeSubmittedAssignment(String experimentName) {
         List<AssignmentComponent> assignments = retrieveSubmittedAssignments();
         boolean removed = assignments.removeIf(a -> a.getExperimentName().equalsIgnoreCase(experimentName));
-        if (removed) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Data/Submitted.json"))) {
-                for (AssignmentComponent a : assignments) {
-                    writer.write(a.toString());
-                    writer.newLine();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        if (removed) saveAssignments(assignments, "Data/Submitted.json");
     }
-
 
 }

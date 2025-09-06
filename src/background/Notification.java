@@ -87,7 +87,7 @@ public class Notification {
 
     public void startScheduler() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(this::checkDeadline, 0, 30, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(this::checkDeadline, 0, 30, TimeUnit.SECONDS);
     }
 
 }
