@@ -7,6 +7,7 @@
 public class Main{
     public static void main(String[] args) {
         //Run Main Form
-        ui.Form.main(args);          
+        ui.Form form = new ui.Form();  
+        form.initUI(); 
     } 
 }

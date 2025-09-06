@@ -7,17 +7,28 @@
 
 package ui;
 
-import java.awt.*;
+//Swing Impoerts
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
-import javax.swing.JMenu;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+
+import backend.AssignmentComponent;
+import backend.FileStorage;
+
+//Misc Imports 
+import java.awt.*;
+import java.sql.Time;
+import java.sql.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 //Button Class
 class Button extends JButton {
@@ -30,6 +41,7 @@ class Button extends JButton {
         setForeground(new Color(41, 68, 90));
         setFont(new Font("Arial",Font.PLAIN,25));
     }
+    
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -41,47 +53,123 @@ class Button extends JButton {
         g2.dispose();
     }
 }
-public class Form extends JFrame{
+public class Form extends JFrame {
 
-    private static int i  = 0;
+    private FileStorage fileStorage = new FileStorage();
+    private DefaultTableModel tableModel;
 
-    public static void main(String[] args) {
-    
-        //Create Frame 
-        JFrame form = new JFrame();
-        form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        form.setVisible(true);
-        form.setSize(900,700);
-        form.setResizable(false);
-        form.setTitle("NoAmnesia");
-        form.setLayout(null);
-    
-        //IMPORTANT
-        ImageIcon icon = new ImageIcon(ui.Form.class.getResource("/resources/icon.png"));
-        form.setIconImage(icon.getImage());
-        form.getContentPane().setBackground(new Color(41, 68, 90));
+    public Form() {
+        initUI(); 
+    }
 
-        JLabel temp = new JLabel();
-        temp.setText(String.valueOf(i));
-        temp.setForeground(new Color(0xFFFDD0));
-        temp.setFont(new Font("Times New Roman",Font.PLAIN,20));
-        temp.setBounds(50,25,800,50);
-        form.add(temp);
+    public void initUI() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(900, 700);
+        setResizable(false);
+        setTitle("NoAmnesia");
+        setLayout(null);
+        setVisible(true);
 
+        // Background color and icon
+        getContentPane().setBackground(new Color(41, 68, 90));
+        ImageIcon icon = new ImageIcon(Form.class.getResource("/resources/icon.png"));
+        setIconImage(icon.getImage());
+
+        // Labels
+        JLabel expLabel = new JLabel("Experiment Name:");
+        expLabel.setBounds(50, 250, 120, 25);
+        add(expLabel);
+
+        JLabel subjLabel = new JLabel("Subject Name:");
+        subjLabel.setBounds(50, 280, 120, 25);
+        add(subjLabel);
+
+        JLabel dateLabel = new JLabel("Submission Date:");
+        dateLabel.setBounds(50, 310, 120, 25);
+        add(dateLabel);
+
+        JLabel timeLabel = new JLabel("Submission Time:");
+        timeLabel.setBounds(50, 340, 120, 25);
+        add(timeLabel);
+
+        // Input fields
+        JTextField experimentField = new JTextField();
+        experimentField.setBounds(180, 250, 200, 25);
+        add(experimentField);
+
+        JTextField subjectField = new JTextField();
+        subjectField.setBounds(180, 280, 200, 25);
+        add(subjectField);
+
+        // Date spinner
+        SpinnerDateModel dateModel = new SpinnerDateModel();
+        JSpinner dateSpinner = new JSpinner(dateModel);
+        dateSpinner.setEditor(new JSpinner.DateEditor(dateSpinner, "yyyy-MM-dd"));
+        dateSpinner.setBounds(180, 310, 200, 25);
+        add(dateSpinner);
+
+        // Time spinner
+        SpinnerDateModel timeModel = new SpinnerDateModel();
+        JSpinner timeSpinner = new JSpinner(timeModel);
+        timeSpinner.setEditor(new JSpinner.DateEditor(timeSpinner, "HH:mm:ss"));
+        timeSpinner.setBounds(180, 340, 200, 25);
+        add(timeSpinner);
+
+        // JTable with DefaultTableModel
+        String[] columns = {"Experiment", "Subject", "Date", "Time"};
+        tableModel = new DefaultTableModel(columns, 0);
+        JTable table = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(50, 70, 600, 150);
+        add(scrollPane);
+
+        // Load existing pending assignments
+        List<AssignmentComponent> pendingList = fileStorage.retrievePendingAssignments();
+        for (AssignmentComponent a : pendingList) {
+            tableModel.addRow(new Object[]{
+                a.getExperimentName(),
+                a.getSubjectName(),
+                a.getSubmissionDate().toString(),
+                a.getSubmissionTime().toString()
+            });
+        }
+
+
+        // Add button
         Button addButton = new Button("+");
         addButton.setBounds(825, 600, 50, 50);
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == addButton){
-                    i += 1;
-                    temp.setText(String.valueOf(i));
-                }
+        add(addButton);
+
+        addButton.addActionListener(e -> {
+            String experiment = experimentField.getText().trim();
+            String subject = subjectField.getText().trim();
+            if (experiment.isEmpty() || subject.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Experiment and Subject cannot be empty!");
+                return;
             }
+
+            Date submissionDate = new Date(((java.util.Date) dateSpinner.getValue()).getTime());
+            Time submissionTime = new Time(((java.util.Date) timeSpinner.getValue()).getTime());
+
+            AssignmentComponent assignment = new AssignmentComponent(
+                    experiment, subject, submissionDate, submissionTime
+            );
+
+            // Add to table
+            tableModel.addRow(new Object[]{
+                assignment.getExperimentName(),
+                assignment.getSubjectName(),
+                assignment.getSubmissionDate().toString(),
+                assignment.getSubmissionTime().toString()
+            });
+
+            // Save to Pending.json
+            fileStorage.addAssignment(assignment);
+
+            // Clear input fields
+            experimentField.setText("");
+            subjectField.setText("");
         });
-        form.add(addButton);
-
-
     }
-}
 
+}
