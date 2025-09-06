@@ -1,8 +1,9 @@
 # NoAmnesia
 
 file structure
+```text
 NoAmnesia/
-├── build/                # compiled .class files (like your current "out/")
+├── out/                # compiled .class files (like your current "out/")
 │   ├── backend/
 │   ├── background/
 │   └── ui/
@@ -11,6 +12,7 @@ NoAmnesia/
 │   ├── backend/
 │   ├── background/
 │   └── ui/
+│   └── Main.java
 │
 ├── resources/            # icons, images
 │   ├── icon.png
