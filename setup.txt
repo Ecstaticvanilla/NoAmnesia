@@ -1,5 +1,8 @@
-#First Time
-    open terminal in NoAmnesia
-    run: npm install
-    (on first time running the script scan the qrcode generated throught whatsapp)
+#Intial Setup
+    - make a group on whatsapp for notification
+    - edit that name in the global variable "chatName"
+    - open terminal in NoAmnesia
+    - run: npm install
+    - scan qrcode which appears in the terminal
+    - wait for 2mins u are good to go ;)
 
