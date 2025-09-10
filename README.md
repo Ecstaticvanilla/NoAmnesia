@@ -2,22 +2,41 @@
 
 file structure
 ```text
-NoAmnesia/
-├── out/                # compiled .class files (like your current "out/")
-│   ├── backend/
-│   ├── background/
-│   └── ui/
+NOAMNESIA
+├── Data                 # runtime app data (not bundled, stays next to jar)
+│   ├── Pending.json 
+│   └── Submitted.json
+|
+├── lib                  # libraries
+│   ├── moodle.py
+│   └── org.json
 │
-├── src/                  # all source code
-│   ├── backend/
-│   ├── background/
-│   └── ui/
-│   └── Main.java
+├── out                  # compiled .class files (like your current "out/")
+│   ├── backend
+│   ├── background
+│   ├── ui
+│   └── Main.class
 │
-├── resources/            # icons, images
-│   ├── icon.png
-│   └── ...
+├── resources            # icons, images
+│   ├── addicon.jpg
+│   └── icon.png
 │
-├── data/                 # runtime app data (not bundled, stays next to jar)
-    ├── Pending.json
-    └── Submitted.json
+├── src                  # all source code
+│   ├── backend          # processes in backend
+│   │   ├── AssignmentComponent.java
+│   │   └── FileStorage.java
+│   │
+│   ├── background       # runs in background
+│   │   ├── JsLauncher.java
+│   │   └── Notification.java
+│   │
+│   └── ui               # Ui shows
+│       └── Form.java
+│
+├── whatsapp_script
+├── .gitignore
+├── AssignmentApp.jar
+├── LICENSE
+├── Main.java
+├── ReadMe.md
+└── setup.txt

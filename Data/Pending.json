@@ -1,5 +1,164 @@
 [
-  {"experimentName":"sad","subjectName":"sad","submissionDate":"2025-09-07","submissionTime":"01:17:11"},
-  {"experimentName":"sadasdad","subjectName":"asdsad","submissionDate":"2025-09-07","submissionTime":"01:17:11"},
-  {"experimentName":"multi thread","subjectName":"DC","submissionDate":"2025-09-07","submissionTime":"01:26:09"}
-] 
+  {
+    "experimentName": "exp 3 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=56856",
+    "submissionDate": "2025-09-02",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Class Diagram B3 and B2 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=56713",
+    "submissionDate": "2025-09-02",
+    "submissionTime": "23:59:00"
+  },
+  {
+    "experimentName": "EXP1 for SRS for A1 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=56717",
+    "submissionDate": "2025-09-03",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Lab 2: Digital Input using Push Button - Batch D (Due date)",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=56950",
+    "submissionDate": "2025-09-04",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "To implement multithreading and multiprocessing in a distributed environment. is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=56665",
+    "submissionDate": "2025-09-04",
+    "submissionTime": "23:55:00"
+  },
+  {
+    "experimentName": "To design and implement SLP for a given problem statement. 1.\tDesign a perceptron using Joone Editor. 2.\tWrite a program using Single Layer perceptron is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=56510",
+    "submissionDate": "2025-09-05",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Expt 4 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57197",
+    "submissionDate": "2025-09-05",
+    "submissionTime": "10:00:00"
+  },
+  {
+    "experimentName": "To implement the Supervised Learning algorithm using BPN is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57111",
+    "submissionDate": "2025-09-09",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "To implement a scalable message oriented middleware for a distributed system using RabbitMQ. is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57005",
+    "submissionDate": "2025-09-10",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Exp 3 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57154",
+    "submissionDate": "2025-09-10",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Exp2 symmetric ciphers is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57186",
+    "submissionDate": "2025-09-11",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Lab 3: UART Serial Communication is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57257",
+    "submissionDate": "2025-09-15",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Interaction diagram for A4 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57181",
+    "submissionDate": "2025-09-16",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Interaction Diagram for A3 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57182",
+    "submissionDate": "2025-09-16",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Interaction Diagram for A2 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57183",
+    "submissionDate": "2025-09-16",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Interaction Diagram for A1 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57184",
+    "submissionDate": "2025-09-16",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Activity Diagram A2 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57320",
+    "submissionDate": "2025-09-16",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Expt 3 (Asymmetric Key Cryptography) B1 B2 B3 B4 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57330",
+    "submissionDate": "2025-09-16",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "eXP4. Sequence and collaboration diagram Div B all batches submission link is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57325",
+    "submissionDate": "2025-09-16",
+    "submissionTime": "23:00:00"
+  },
+  {
+    "experimentName": "Exp 5. Div. B all batch submission is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57374",
+    "submissionDate": "2025-09-17",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Unsupervised Training Algorithms [KSOFM and LVQ] is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57375",
+    "submissionDate": "2025-09-17",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Activity Diagram  A3 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57321",
+    "submissionDate": "2025-09-18",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Activity Diagram  A4 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57322",
+    "submissionDate": "2025-09-19",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Aim - To demonstrate Physical Clock Synchronization Algorithms in Distributed Systems. is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57235",
+    "submissionDate": "2025-09-20",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Activity Diagram A1 is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57323",
+    "submissionDate": "2025-09-20",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Lab 4: Timer and Delay Generation is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57341",
+    "submissionDate": "2025-09-21",
+    "submissionTime": "00:00:00"
+  },
+  {
+    "experimentName": "Exp 1 a,1b is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=56285",
+    "submissionDate": "2025-09-09",
+    "submissionTime": "00:00:00"
+  }
+]
