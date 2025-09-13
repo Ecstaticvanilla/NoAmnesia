@@ -33,9 +33,11 @@ NOAMNESIA
 │   └── ui               # Ui shows
 │       └── Form.java
 │
-├── whatsapp_script
+├── whatsapp_script      # Automessage sending script
+│   └── index.js
+|
 ├── .gitignore
-├── AssignmentApp.jar
+├── NoAmnesia.jar
 ├── LICENSE
 ├── Main.java
 ├── ReadMe.md

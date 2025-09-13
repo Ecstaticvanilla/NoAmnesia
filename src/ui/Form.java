@@ -16,15 +16,20 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 import backend.AssignmentComponent;
 import backend.FileStorage;
 
 //Misc Imports 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.Time;
 import java.sql.Date;
 import java.util.List;
@@ -211,6 +216,104 @@ public class Form extends JFrame {
                     a.getSubmissionTime().toString()
                 });
             }        
+        });
+        //Collect Button
+        Button collectButton = new Button("Fetch Assignments");
+        collectButton.setBounds(135,600,170,50);
+        collectButton.setFont(new Font("Arial",Font.PLAIN,15));
+        add(collectButton);
+        collectButton.addActionListener(e->{
+            JFrame popup = new JFrame("Moodle Signin");
+            popup.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            popup.setSize(400, 200);
+            popup.setResizable(false);
+            popup.setLayout(null);
+            JLabel usernameLabel = new JLabel("Username:");
+            usernameLabel.setBounds(40, 30, 100, 25);
+            usernameLabel.setForeground(Color.WHITE);
+            popup.add(usernameLabel);
+
+            JLabel passwordLabel  = new JLabel("Password:");
+            passwordLabel.setBounds(40, 70, 100, 25);
+            passwordLabel.setForeground(Color.WHITE);
+            popup.add(passwordLabel);
+            
+            // Input fields
+            JTextField usenameField = new JTextField();
+            usenameField.setBounds(120, 30, 200, 25);
+            popup.add(usenameField);
+            
+            JPasswordField passwordField = new JPasswordField();
+            passwordField.setBounds(120, 70, 200, 25);
+            popup.add(passwordField);
+
+            //Login Button
+            Button loginButton = new Button("Login");
+            loginButton.setBounds(135,115,100,25);
+            loginButton.setFont(new Font("Arial",Font.PLAIN,15));
+            popup.add(loginButton);
+        
+            loginButton.addActionListener(ee -> {
+                popup.dispose();
+                JDialog loadingDialog = new JDialog(this, "Loading...", true);
+                JLabel loadingLabel = new JLabel("Fetching assignments, please wait...");
+                loadingLabel.setHorizontalAlignment(JLabel.CENTER);
+                loadingDialog.add(loadingLabel);
+                loadingDialog.setSize(300, 100);
+                loadingDialog.setLocationRelativeTo(this);
+                new Thread(() -> {
+                    try {
+                        String username = usenameField.getText();
+                        String passwordString = new String(passwordField.getPassword());
+                        ProcessBuilder process = new ProcessBuilder("py", "lib/moodle.py", username, passwordString);
+                        process.redirectErrorStream(true);
+                        Process p = process.start();
+
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            System.out.println("PYTHON: " + line);
+                        }
+                        int exitCode = p.waitFor();
+                        System.out.println("Python finished with code: " + exitCode);
+                        SwingUtilities.invokeLater(() -> refreshButton.doClick());
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    } finally {
+                        SwingUtilities.invokeLater(() -> loadingDialog.dispose());
+                    }
+                }).start();
+
+                loadingDialog.setVisible(true);
+            });
+            // loginButton.addActionListener(ee-> {
+            //     try {
+            //         String passwordString = new String(passwordField.getPassword());                    
+            //         System.out.println("Starting");
+            //         ProcessBuilder process = new ProcessBuilder("py", "lib/moodle.py",usenameField.getText(),passwordString);
+            //         process.redirectErrorStream(true);
+
+            //         Process p = process.start();
+
+            //         java.io.BufferedReader reader =
+            //                 new java.io.BufferedReader(new java.io.InputStreamReader(p.getInputStream()));
+
+            //         String line;
+            //         while ((line = reader.readLine()) != null) {
+            //             System.out.println("PYTHON: " + line);
+            //         }         
+            //         int exitCode = p.waitFor();
+            //         System.out.println("Python finished with code: " + exitCode);
+            //         popup.dispose();
+            //     } catch (Exception f) {
+            //         f.printStackTrace();
+            //     }
+            // });
+
+            popup.getContentPane().setBackground(new Color(41, 68, 90));
+            popup.setIconImage(icon.getImage());
+            popup.setVisible(true);
         });
         setVisible(true);
     }

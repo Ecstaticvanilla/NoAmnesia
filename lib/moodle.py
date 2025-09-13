@@ -7,7 +7,11 @@ from bs4 import BeautifulSoup
 import json
 from datetime import datetime
 import os
+import sys
 import time
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 PENDING_FILE = "Data/Pending.json"
 if os.path.exists(PENDING_FILE):
@@ -78,5 +82,11 @@ def scrape (USERNAME,PASSWORD):
 
     time.sleep(0.5)
 
+if __name__ == "__main__":
+    if len(sys.argv) >= 3:
+        username = sys.argv[1]
+        password = sys.argv[2]
+        scrape(username, password)
+        print("done with no errors")
 
 

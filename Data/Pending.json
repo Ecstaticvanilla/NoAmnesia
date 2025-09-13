@@ -42,6 +42,12 @@
     "submissionTime": "10:00:00"
   },
   {
+    "experimentName": "Exp 1 a,1b is due",
+    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=56285",
+    "submissionDate": "2025-09-09",
+    "submissionTime": "00:00:00"
+  },
+  {
     "experimentName": "To implement the Supervised Learning algorithm using BPN is due",
     "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57111",
     "submissionDate": "2025-09-09",
@@ -66,9 +72,9 @@
     "submissionTime": "00:00:00"
   },
   {
-    "experimentName": "Lab 3: UART Serial Communication is due",
+    "experimentName": "Lab 3: UART Serial Communication - Batch D (Due date)",
     "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57257",
-    "submissionDate": "2025-09-15",
+    "submissionDate": "2025-09-12",
     "submissionTime": "00:00:00"
   },
   {
@@ -153,12 +159,6 @@
     "experimentName": "Lab 4: Timer and Delay Generation is due",
     "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=57341",
     "submissionDate": "2025-09-21",
-    "submissionTime": "00:00:00"
-  },
-  {
-    "experimentName": "Exp 1 a,1b is due",
-    "subjectName": "https://moodle.spit.ac.in/mod/assign/view.php?id=56285",
-    "submissionDate": "2025-09-09",
     "submissionTime": "00:00:00"
   }
 ]
